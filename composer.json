@@ -12,7 +12,6 @@
         "laravel/socialite": "~2.0",
         "milon/barcode": "^5.2",
         "ixudra/curl": "6.*",
-        "guzzlehttp/guzzle": "4.0.0",
         "laravelcollective/html":"^5.3.0"
     },
     "require-dev": {
