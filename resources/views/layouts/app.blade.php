@@ -41,8 +41,8 @@
 </head>
 <body>
     <nav class="navbar navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
+      <div id="navigation">
+        <div id="navbar-logo" class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -50,37 +50,43 @@
           </button>
           <a class="navbar-left" href="{{ url('/') }}"><img src="{{ url('images/logo.png') }}"></a>
         </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav pull-right">
-            @if (Session::has('username') && Session::get('usertype') == 'MERCHANT')
-                <li><a href="{{ url('admin/event') }}">Events</a></li>
-                <li><a href="{{ url('admin/kyc') }}">Members</a></li>
-            @elseif (Session::has('username') && Session::get('usertype') == 'CLIENT')
-                <li><a href="{{ url('event') }}">Events</a></li>
-            @endif
 
-            @if (!Session::has('username'))
-                <li><a href="{{ url('/login') }}">Login</a></li>
-                <li><a href="{{ url('/register') }}">Register</a></li>
-            @else
-                <li class="dropdown">
-                    <a href="#" style="text-transform: uppercase;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        {{ Session::get('username') }} <span class="caret"></span>
-                    </a>
+        <div id="navbar-menu">
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav pull-right">
+                @if (Session::has('username') && Session::get('usertype') == 'MERCHANT')
+                    <li><a href="{{ url('admin/event') }}">Events</a></li>
+                    <li><a href="{{ url('admin/kyc') }}">Members</a></li>
+                @elseif (Session::has('username') && Session::get('usertype') == 'CLIENT')
+                    <li><a href="{{ url('event') }}">Events</a></li>
+                @endif
 
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            @if(Session::get('usertype') == 'CLIENT')<a href="{{ url('profile') }}">Profile</a>@endif
-                            <a href="{{ url('/logout') }}">Logout</a>
-                        </li>
-                    </ul>
-                </li>
-            @endif
-<!--             <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Page</a></li>
-            <li><a href="#">Link</a></li> -->
-          </ul>
-        </div><!--/.nav-collapse -->
+                @if (!Session::has('username'))
+                    <li><a href="{{ url('/login') }}">Login</a></li>
+                    <li><a href="{{ url('/register') }}">Register</a></li>
+                @else
+                    <li class="dropdown">
+                        <a href="#" style="text-transform: uppercase;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ Session::get('username') }} <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                @if(Session::get('usertype') == 'CLIENT')<a href="{{ url('profile') }}">Profile</a>@endif
+                                <a href="{{ url('/logout') }}">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
+    <!--             <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Page</a></li>
+                <li><a href="#">Link</a></li> -->
+                </ul>
+            </div>
+            <!--.nav-collapse -->
+        </div>
+        <!-- #navigation -->
+        
       </div>
     </nav>
 

@@ -45,6 +45,27 @@ a:hover, a:focus{
 /***********************************
 Navigation bar
 ************************************/
+
+#navigation{
+    display: table;
+    width: 100%;
+}
+
+#navbar-menu, #navbar-logo {
+    vertical-align: middle;
+    display: table-cell;
+}
+#navbar-logo{
+    padding: 0px 30px;
+}
+#navbar-menu ul li a {
+    color: #8e8e8e;
+}
+#navbar-menu .nav li#active a, #navbar-menu .nav li a:hover, #navbar-menu .nav li a:focus{
+    color: #52959D;
+    text-decoration: none;
+    background-color: transparent;
+}
 .navbar-default .navbar-brand {
     color: #74AAB0;
 }

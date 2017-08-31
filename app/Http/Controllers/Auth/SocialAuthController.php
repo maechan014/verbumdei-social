@@ -11,6 +11,7 @@ use Session;
 use Input;
 use Auth;
 use Socialite;
+use App\User;
 
 ini_set('max_execution_time', 0);
 
@@ -37,10 +38,15 @@ class SocialAuthController extends Controller
     public function handleProviderCallback($provider)
     {
         $user = Socialite::driver($provider)->user();
-
         $authUser = $this->findOrCreateUser($user, $provider);
-        Auth::login($authUser, true);
-        return redirect($this->redirectTo);
+
+        if(Session::has('username')){
+            return redirect('profile');
+        }
+        else{
+            return view('auth.login');
+        }
+        //return redirect('profile'); 
     }
 
     /**
@@ -52,15 +58,66 @@ class SocialAuthController extends Controller
      */
     public function findOrCreateUser($user, $provider)
     {
-        $authUser = User::where('provider_id', $user->id)->first();
-        if ($authUser) {
-            return $authUser;
+
+        // check if user already exist
+        $userExist = Curl::to(Config('database.connections.curlIp'))
+            ->withData([ 'mtmaccess_api' => 'true',
+                          'transaction' => '20000',
+                          'userName' => $user->getNickname()])
+            ->asJson()
+            ->get();
+        if ($userExist->success) {
+                if(isset($userExist->result->userData)) {
+                    Session::put('usertype', $userExist->result->userData->type);
+                    Session::put('name', $user->name);
+                    Session::put('username', $user->getNickname());
+                    Session::put('token', $user->token);
+                    Session::put('token_secret', $user->tokenSecret);
+                    Session::put('branchId', $userExist->result->userData->branchId_fk);
+                } else {
+                    Session::put('usertype', $userExist->result->type);
+                    Session::put('name', $user->name);
+                    Session::put('username', $user->getNickname());
+                    Session::put('token', $user->token);
+                    Session::put('token_secret', $user->tokenSecret);
+                    Session::put('branchId', $userExist->result->branchId_fk);
+                }
+                return redirect('profile');
+
+        } else{
+            // Create user
+            $response = Curl::to(Config('database.connections.curlIp'))
+            ->withData([ 'mtmaccess_api' => 'true',
+                          'transaction' => '20004', 
+                          'firstName' => $user->name,
+                          'userName' => $user->getNickname(),
+                          'provider' => $provider,
+                          'provider_id' => $user->id,
+                          'token' => $user->token,
+                          'token_secret' => $user->tokenSecret,
+                          'email' => $user->getEmail()])
+
+            ->asJson()
+            ->get();
+
+            if($response->success) {
+                Session::put('usertype', 'CLIENT');
+                Session::put('name', $user->name);
+                Session::put('username', $user->getNickname());
+                Session::put('token', $user->token);
+                Session::put('token_secret', $user->tokenSecret);
+                return redirect('profile');
+            } else {
+                return redirect()->back()->withInput()->with('response',$response);
+            }
         }
-        return User::create([
-            'name'     => $user->name,
-            'email'    => $user->email,
-            'provider' => $provider,
-            'provider_id' => $user->id
-        ]);
+        /*return User::create([
+            'name'        => $user->name,
+            'email'       => $user->getEmail(),
+            'provider'    => $provider,
+            'provider_id' => $user->id,
+            'token'       => $user->token,
+            'token_secret'=> $user->tokenSecret,
+        ]);*/
     }
 }

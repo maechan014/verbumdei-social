@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="bg"></div>
-<div class="jumbotron" style="text-align: center;">
-  <h1>WELCOME TO OUR FAMILY IN CEBU!</h1>
+<div class="header">
+    <div class="bg"></div>
+    <div class="jumbotron" style="text-align: center;">
+      <h1>WELCOME TO OUR FAMILY IN CEBU!</h1>
+    </div>
 </div>
 <div class="container">
     <div class="row">
