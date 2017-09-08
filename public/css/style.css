@@ -51,17 +51,22 @@ Navigation bar
     width: 100%;
 }
 
+#navbar-logo .navbar-toggle span{
+    background: #52959D;
+}
+
 #navbar-menu, #navbar-logo {
     vertical-align: middle;
     display: table-cell;
 }
 #navbar-logo{
-    padding: 0px 30px;
+     padding: 0px 30px;
 }
-#navbar-menu ul li a {
+
+#navbar-menu .nav li a {
     color: #8e8e8e;
 }
-#navbar-menu .nav li#active a, #navbar-menu .nav li a:hover, #navbar-menu .nav li a:focus{
+#navbar-menu .nav li a#active, #navbar-menu .nav li a:hover, #navbar-menu .nav li a:focus{
     color: #52959D;
     text-decoration: none;
     background-color: transparent;
@@ -730,6 +735,18 @@ Responsive media queries
     font-size: 18px;
     }   
 }
+
+@media (max-width: 765px){
+    #navbar-menu, #navbar-logo {
+        display: flex;
+    }
+    .navbar-fixed-top .navbar-collapse{
+        margin: auto;
+        text-align: center;
+    }
+
+}
+
 @media (min-width: 20px) and (max-width: 450px) {
     .text-dec {
     font-size: 20px;

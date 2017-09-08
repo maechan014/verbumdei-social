@@ -460,3 +460,13 @@ nav.navbar.shrink .navbar-toggle {
 .header {
     height: 650px;
 }
+
+
+/*OVERRIDES*/
+.datepicker{
+    width: 300px;
+}
+
+.datepicker table{
+    margin: auto;
+}

@@ -43,16 +43,16 @@
     <nav class="navbar navbar-fixed-top">
       <div id="navigation">
         <div id="navbar-logo" class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-left" href="{{ url('/') }}"><img src="{{ url('images/logo.png') }}"></a>
+            <button type="button" class="navbar-toggle pull-right" data-toggle="collapse" data-target="#navbar-menu-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-left" href="{{ url('/') }}"><img src="{{ url('images/logo.png') }}"></a>
         </div>
 
         <div id="navbar-menu">
-            <div class="collapse navbar-collapse">
+            <div class="navbar-collapse collapse" id="navbar-menu-collapse">
                 <ul class="nav navbar-nav pull-right">
                 @if (Session::has('username') && Session::get('usertype') == 'MERCHANT')
                     <li><a href="{{ url('admin/event') }}">Events</a></li>
@@ -62,8 +62,12 @@
                 @endif
 
                 @if (!Session::has('username'))
-                    <li><a href="{{ url('/login') }}">Login</a></li>
-                    <li><a href="{{ url('/register') }}">Register</a></li>
+                    <li class="{{ Request::is('login') ? 'active' : '' }}">
+                        <a href="{{ url('/login') }}">Login</a>
+                    </li>
+                    <li class="{{ Request::is('register') ? 'active' : '' }}">
+                        <a href="{{ url('/register') }}">Register</a>
+                        </li>
                 @else
                     <li class="dropdown">
                         <a href="#" style="text-transform: uppercase;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

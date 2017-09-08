@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Ixudra\Curl\Facades\Curl;
@@ -63,23 +64,23 @@ class SocialAuthController extends Controller
         $userExist = Curl::to(Config('database.connections.curlIp'))
             ->withData([ 'mtmaccess_api' => 'true',
                           'transaction' => '20000',
-                          'userName' => $user->getNickname()])
+                          'userName' => $user->getEmail()])
             ->asJson()
             ->get();
         if ($userExist->success) {
                 if(isset($userExist->result->userData)) {
                     Session::put('usertype', $userExist->result->userData->type);
                     Session::put('name', $user->name);
-                    Session::put('username', $user->getNickname());
+                    Session::put('username', $user->getEmail());
                     Session::put('token', $user->token);
-                    Session::put('token_secret', $user->tokenSecret);
+                   // Session::put('token_secret', $user->tokenSecret);
                     Session::put('branchId', $userExist->result->userData->branchId_fk);
                 } else {
                     Session::put('usertype', $userExist->result->type);
                     Session::put('name', $user->name);
-                    Session::put('username', $user->getNickname());
+                    Session::put('username', $user->getEmail());
                     Session::put('token', $user->token);
-                    Session::put('token_secret', $user->tokenSecret);
+                  //  Session::put('token_secret', $user->tokenSecret);
                     Session::put('branchId', $userExist->result->branchId_fk);
                 }
                 return redirect('profile');
@@ -90,11 +91,11 @@ class SocialAuthController extends Controller
             ->withData([ 'mtmaccess_api' => 'true',
                           'transaction' => '20004', 
                           'firstName' => $user->name,
-                          'userName' => $user->getNickname(),
+                          'userName' => $user->getEmail(),
                           'provider' => $provider,
                           'provider_id' => $user->id,
                           'token' => $user->token,
-                          'token_secret' => $user->tokenSecret,
+                          //'token_secret' => $user->tokenSecret,
                           'email' => $user->getEmail()])
 
             ->asJson()
@@ -103,9 +104,9 @@ class SocialAuthController extends Controller
             if($response->success) {
                 Session::put('usertype', 'CLIENT');
                 Session::put('name', $user->name);
-                Session::put('username', $user->getNickname());
+                Session::put('username', $user->getEmail());
                 Session::put('token', $user->token);
-                Session::put('token_secret', $user->tokenSecret);
+              //  Session::put('token_secret', $user->tokenSecret);
                 return redirect('profile');
             } else {
                 return redirect()->back()->withInput()->with('response',$response);
