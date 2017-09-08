@@ -1,0 +1,58 @@
+/**
+SOCIAL LOGIN
+**/
+
+.divider {
+	color: #b4a9a7;
+	width: 50%;
+}
+
+#login-btn .btn {
+	width: 100%;
+}
+
+#login-btn div {
+	padding-top: 10px;
+}
+
+.social-login-btn {
+	font-size: 20px;
+	color: #fff;
+	margin: 0px 5px;
+	width: 50px;
+	border-radius: 40px;
+}
+
+.social-btn-round {
+	width: 50px;
+	border-radius: 40px;
+}
+
+.social-twt {
+	background-color: #1daee3; 
+}
+.social-fb {
+	background-color: #4c699e;
+}
+
+.social-linkedin {
+	background-color: #4875B4;
+}
+
+.social-google {
+	background-color: #da573b;
+}
+
+.social-login-btn i{
+	/*width: 30px;*/
+	margin-left: -3px;
+}
+
+#social-btn .btn:hover, #social-btn .btn:active, #social-btn .btn:focus {
+	color: #fff;
+}
+
+/*OVERRIDES*/
+.panel-body {
+	padding-top: 50px;
+}

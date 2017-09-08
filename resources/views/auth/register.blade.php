@@ -118,9 +118,11 @@
 
                          <!-- SOCIAL AUTH BUTTONS -->
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <a href="{{ url('/auth/twitter') }}" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>
-                                <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
+                            <div class="col-md-6 col-md-offset-4" id="social-btn">
+                                <a href="{{ url('/auth/twitter') }}" class="btn btn-twitter social-login-btn social-twt"><i class="fa fa-twitter"></i></a>
+                                <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook social-login-btn social-fb"><i class="fa fa-facebook"></i></a>
+                                <a href="{{ url('/auth/google') }}" class="btn btn-google social-login-btn social-google"><i class="fa fa-google"></i></a>
+                                <a href="{{ url('/auth/linkedin') }}" class="btn btn-linkedin social-login-btn social-linkedin"><i class="fa fa-linkedin"></i></a>
                             </div>
                         </div>
                         

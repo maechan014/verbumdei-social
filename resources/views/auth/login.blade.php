@@ -16,10 +16,10 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                            <label for="username" class="col-md-4 control-label">Username</label>
+                           <!--  <label for="username" class="col-md-4 control-label">Username</label> -->
 
-                            <div class="col-md-6">
-                                <input id="username" type="username" class="form-control" name="username" value="{{ old('username') }}" required autofocus>
+                            <div class="col-md-offset-3 col-md-6">
+                                <input id="username" type="username" class="form-control" name="username" placeholder="USERNAME" value="{{ old('username') }}" required autofocus>
 
                                 @if ($errors->has('username'))
                                     <span class="help-block">
@@ -30,10 +30,10 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                            <!-- <label for="password" class="col-md-4 control-label">Password</label> -->
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                            <div class="col-md-offset-3 col-md-6">
+                                <input id="password" type="password" class="form-control" name="password" placeholder="PASSWORD" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -43,11 +43,13 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
+                        <div class="form-group" id="login-btn">
+                            <div class="col-md-6 col-md-offset-3">
                                 <button type="submit" class="btn btn-primary">
                                     Login
                                 </button>
+                            </div>
+                            <div class="col-md-6 col-md-offset-3">
                                 <a class="btn btn-default" href="{{url('register')}}">Register</a>
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">
                                     Forgot Your Password?
@@ -55,13 +57,17 @@
                             </div>
                         </div>
 
+
+                        <hr class="divider">
+
                          <!-- SOCIAL AUTH BUTTONS -->
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <a href="{{ url('/auth/twitter') }}" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>
-                                <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
-                                <a href="{{ url('/auth/google') }}" class="btn btn-google"><i class="fa fa-google"></i> Google</a>
-                                <a href="{{ url('/auth/linkedin') }}" class="btn btn-linkedin"><i class="fa fa-linkedin"></i> LinkedIn</a>
+                            <div class="col-md-6 col-md-offset-3" id="social-btn">
+
+                                <a href="{{ url('/auth/twitter') }}" class="btn btn-twitter social-login-btn social-twt"><i class="fa fa-twitter"></i></a>
+                                <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook social-login-btn social-fb"><i class="fa fa-facebook"></i></a>
+                                <a href="{{ url('/auth/google') }}" class="btn btn-google social-login-btn social-google"><i class="fa fa-google"></i></a>
+                                <a href="{{ url('/auth/linkedin') }}" class="btn btn-linkedin social-login-btn social-linkedin"><i class="fa fa-linkedin"></i></a>
                             </div>
                         </div>
                     </form>

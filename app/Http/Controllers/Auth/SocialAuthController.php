@@ -47,7 +47,6 @@ class SocialAuthController extends Controller
         else{
             return view('auth.login');
         }
-        //return redirect('profile'); 
     }
 
     /**
@@ -62,55 +61,45 @@ class SocialAuthController extends Controller
 
         // check if user already exist
         $userExist = Curl::to(Config('database.connections.curlIp'))
-            ->withData([ 'mtmaccess_api' => 'true',
-                          'transaction' => '20000',
-                          'userName' => $user->getEmail()])
-            ->asJson()
-            ->get();
+          ->withData([ 'mtmaccess_api' => 'true',
+                        'transaction' => '20000',
+                        'userName' => $user->getEmail()])
+          ->asJson()
+          ->get();
+
         if ($userExist->success) {
-                if(isset($userExist->result->userData)) {
-                    Session::put('usertype', $userExist->result->userData->type);
-                    Session::put('name', $user->name);
-                    Session::put('username', $user->getEmail());
-                    Session::put('token', $user->token);
-                   // Session::put('token_secret', $user->tokenSecret);
-                    Session::put('branchId', $userExist->result->userData->branchId_fk);
-                } else {
-                    Session::put('usertype', $userExist->result->type);
-                    Session::put('name', $user->name);
-                    Session::put('username', $user->getEmail());
-                    Session::put('token', $user->token);
-                  //  Session::put('token_secret', $user->tokenSecret);
-                    Session::put('branchId', $userExist->result->branchId_fk);
-                }
-                return redirect('profile');
+          Session::put('usertype', 'CLIENT');
+          Session::put('name', $user->name);
+          Session::put('username', $user->getEmail());
+          Session::put('token', $user->token);
+          //Session::put('branchId', Input::get('community'));
+          return redirect('profile');
 
         } else{
-            // Create user
-            $response = Curl::to(Config('database.connections.curlIp'))
-            ->withData([ 'mtmaccess_api' => 'true',
-                          'transaction' => '20004', 
-                          'firstName' => $user->name,
-                          'userName' => $user->getEmail(),
-                          'provider' => $provider,
-                          'provider_id' => $user->id,
-                          'token' => $user->token,
-                          //'token_secret' => $user->tokenSecret,
-                          'email' => $user->getEmail()])
+          // Create user
+          $response = Curl::to(Config('database.connections.curlIp'))
+          ->withData([ 'mtmaccess_api' => 'true',
+                        'transaction' => '20004', 
+                        'firstName' => $user->name,
+                        'userName' => $user->getEmail(),
+                        'provider' => $provider,
+                        'provider_id' => $user->id,
+                        'token' => $user->token,
+                        'email' => $user->getEmail()])
 
-            ->asJson()
-            ->get();
+          ->asJson()
+          ->get();
 
-            if($response->success) {
-                Session::put('usertype', 'CLIENT');
-                Session::put('name', $user->name);
-                Session::put('username', $user->getEmail());
-                Session::put('token', $user->token);
-              //  Session::put('token_secret', $user->tokenSecret);
-                return redirect('profile');
-            } else {
-                return redirect()->back()->withInput()->with('response',$response);
-            }
+          if($response->success) {
+              Session::put('usertype', 'CLIENT');
+              Session::put('name', $user->name);
+              Session::put('username', $user->getEmail());
+              Session::put('token', $user->token);
+            //  Session::put('branchId', Input::get('community'));
+              return redirect('profile');
+          } else {
+              return redirect()->back()->withInput()->with('response',$response);
+          }
         }
         /*return User::create([
             'name'        => $user->name,

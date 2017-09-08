@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
     <link href="{{ url('css/style.css') }}" rel="stylesheet" >
     <link href="{{ url('css/myStyle.css') }}" rel="stylesheet" >
+     <link href="{{ url('css/login.css') }}" rel="stylesheet" >
     <script src="{{ url('js/jquery-3.2.0.min.js') }}"></script>
     
     @yield('style')
