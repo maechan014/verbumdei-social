@@ -4,9 +4,15 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <center><h1>Register</h1></center>
-            <hr>
+            <div class="panel-head">    
+                <center><h1>Register</h1></center>
+            </div>  
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+            <!-- <center><h1>Register</h1></center> -->
+            <!-- <hr> -->
             <div class="panel panel-default">
+
                 <div class="panel-body">
                     @if(session()->has('response') || $errors->count() > 0)
                     <div class="alert alert-danger fade in">
@@ -27,78 +33,78 @@
                     <form class="form-horizontal" method="POST" action="{{ url('register') }}">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="username" class="col-md-4 control-label">Username</label>
+                            <!-- <label for="username" class="col-md-4 control-label">Username</label> -->
 
-                            <div class="col-md-6">
-                                <input id="username" type="text" class="form-control" name="username" required autofocus>
+                            <div class="col-md-6 col-md-offset-3">
+                                <input id="username" type="text" class="form-control" name="username" placeholder="Username" required autofocus>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                            <!-- <label for="password" class="col-md-4 control-label">Password</label> -->
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required autofocus>
+                            <div class="col-md-6 col-md-offset-3">
+                                <input id="password" type="password" class="form-control" name="password" placeholder="Password" required autofocus>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="password_confirmation" class="col-md-4 control-label">Password Confirmation</label>
+                            <!-- <label for="password_confirmation" class="col-md-4 control-label">Password Confirmation</label> -->
 
-                            <div class="col-md-6">
-                                <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required autofocus>
+                            <div class="col-md-6 col-md-offset-3">
+                                <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" required autofocus>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="firstName" class="col-md-4 control-label">First Name</label>
+                            <!-- <label for="firstName" class="col-md-4 control-label">First Name</label> -->
 
-                            <div class="col-md-6">
-                                <input id="firstName" type="text" class="form-control" name="firstName" required autofocus>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="lastName" class="col-md-4 control-label">Last Name</label>
-
-                            <div class="col-md-6">
-                                <input id="lastName" type="text" class="form-control" name="lastName" required autofocus>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="middleName" class="col-md-4 control-label">Middle Name</label>
-
-                            <div class="col-md-6">
-                                <input id="middleName" type="text" class="form-control" name="middleName" required autofocus>
+                            <div class="col-md-6 col-md-offset-3">
+                                <input id="firstName" type="text" class="form-control" name="firstName" placeholder="First Name" required autofocus>
                             </div>
                         </div>
 
 
                         <div class="form-group">
-                            <label for="email" class="col-md-4 control-label">Email Address</label>
+                            <!-- <label for="lastName" class="col-md-4 control-label">Last Name</label> -->
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" required>
+                            <div class="col-md-6 col-md-offset-3">
+                                <input id="lastName" type="text" class="form-control" name="lastName" placeholder="Last Name" required autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <!-- <label for="middleName" class="col-md-4 control-label">Middle Name</label> -->
+
+                            <div class="col-md-6 col-md-offset-3">
+                                <input id="middleName" type="text" class="form-control" name="middleName" placeholder="Middle Name" required autofocus>
                             </div>
                         </div>
 
 
                         <div class="form-group">
-                            <label for="mobile" class="col-md-4 control-label">Mobile Number</label>
+                            <!-- <label for="email" class="col-md-4 control-label">Email Address</label> -->
 
-                            <div class="col-md-6">
-                                <input id="mobile" type="text" class="form-control" name="mobile" required autofocus>
+                            <div class="col-md-6 col-md-offset-3">
+                                <input id="email" type="email" class="form-control" name="email" placeholder="Email" required>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <!-- <label for="mobile" class="col-md-4 control-label">Mobile Number</label> -->
+
+                            <div class="col-md-6 col-md-offset-3">
+                                <input id="mobile" type="text" class="form-control" name="mobile" placeholder="Mobile" required autofocus>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="name" class="col-md-4 control-label">Community</label>
+                            <!-- <label for="name" class="col-md-4 control-label">Community</label> -->
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-md-offset-3">
                                 <select id="community" class="form-control" name="community">
-                                    <option value="">-Select Community-</option>
+                                    <option value="">Select Community</option>
                                     @if($communities->success)
                                         @foreach($communities->result as $community)
                                             <option value="{{$community->branchId}}">{{$community->name}}</option>
@@ -108,17 +114,20 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                        <div class="form-group logreg-btn">
+                            <div class="col-md-6 col-md-offset-3">
                                 <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>
                             </div>
                         </div>
 
+                        <hr class="divider">
+
                          <!-- SOCIAL AUTH BUTTONS -->
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4" id="social-btn">
+                        <div class="form-group text-center">
+                            <div class="col-md-6 col-md-offset-3" id="social-btn">
+
                                 <a href="{{ url('/auth/twitter') }}" class="btn btn-twitter social-login-btn social-twt"><i class="fa fa-twitter"></i></a>
                                 <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook social-login-btn social-fb"><i class="fa fa-facebook"></i></a>
                                 <a href="{{ url('/auth/google') }}" class="btn btn-google social-login-btn social-google"><i class="fa fa-google"></i></a>

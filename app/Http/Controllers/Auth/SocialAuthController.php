@@ -11,7 +11,7 @@ use Ixudra\Curl\Facades\Curl;
 use Session;
 use Input;
 use Auth;
-use Socialite;
+use Socialite;  
 use App\User;
 
 ini_set('max_execution_time', 0);

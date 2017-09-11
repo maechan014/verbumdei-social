@@ -7,12 +7,21 @@ SOCIAL LOGIN
 	width: 50%;
 }
 
-#login-btn .btn {
+.logreg-btn .btn {
 	width: 100%;
 }
 
-#login-btn div {
+.logreg-btn div {
 	padding-top: 10px;
+}
+
+.panel-head {
+	background: #74AAB0;
+	padding: 20px;
+	margin-top: 30px;
+}
+.panel-head h1 {
+	color: #fff;
 }
 
 .social-login-btn {
@@ -52,7 +61,17 @@ SOCIAL LOGIN
 	color: #fff;
 }
 
+
 /*OVERRIDES*/
+
+.form-control {
+	border-radius: 0px;
+}
+
+.panel {
+	border-radius: 0px;
+}
+
 .panel-body {
 	padding-top: 50px;
 }
