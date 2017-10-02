@@ -59,55 +59,47 @@ class SocialAuthController extends Controller
     public function findOrCreateUser($user, $provider)
     {
 
-        // check if user already exist
-        $userExist = Curl::to(Config('database.connections.curlIp'))
-          ->withData([ 'mtmaccess_api' => 'true',
-                        'transaction' => '20000',
-                        'userName' => $user->getEmail()])
-          ->asJson()
-          ->get();
+      // check if user already exist
+      $userExist = Curl::to(Config('database.connections.curlIp'))
+        ->withData([ 'mtmaccess_api' => 'true',
+                      'transaction' => '20000',
+                      'userName' => $user->getEmail()])
+        ->asJson()
+        ->get();
 
-        if ($userExist->success) {
-          Session::put('usertype', 'CLIENT');
-          Session::put('name', $user->name);
-          Session::put('username', $user->getEmail());
-          Session::put('token', $user->token);
-          //Session::put('branchId', Input::get('community'));
-          return redirect('profile');
+      if ($userExist->success) {
+        Session::put('usertype', 'CLIENT');
+        Session::put('name', $user->name);
+        Session::put('username', $user->getEmail());
+        Session::put('token', $user->token);
+        //Session::put('branchId', Input::get('community'));
+        return redirect('profile');
 
-        } else{
-          // Create user
-          $response = Curl::to(Config('database.connections.curlIp'))
-          ->withData([ 'mtmaccess_api' => 'true',
-                        'transaction' => '20004', 
-                        'firstName' => $user->name,
-                        'userName' => $user->getEmail(),
-                        'provider' => $provider,
-                        'provider_id' => $user->id,
-                        'token' => $user->token,
-                        'email' => $user->getEmail()])
+      } else{
+        // Create user
+        $response = Curl::to(Config('database.connections.curlIp'))
+        ->withData([ 'mtmaccess_api' => 'true',
+                      'transaction' => '20004', 
+                      'firstName' => $user->name,
+                      'userName' => $user->getEmail(),
+                      'provider' => $provider,
+                      'provider_id' => $user->id,
+                      'token' => $user->token,
+                      'email' => $user->getEmail()])
 
-          ->asJson()
-          ->get();
+        ->asJson()
+        ->get();
 
-          if($response->success) {
-              Session::put('usertype', 'CLIENT');
-              Session::put('name', $user->name);
-              Session::put('username', $user->getEmail());
-              Session::put('token', $user->token);
-            //  Session::put('branchId', Input::get('community'));
-              return redirect('profile');
-          } else {
-              return redirect()->back()->withInput()->with('response',$response);
-          }
+        if($response->success) {
+            Session::put('usertype', 'CLIENT');
+            Session::put('name', $user->name);
+            Session::put('username', $user->getEmail());
+            Session::put('token', $user->token);
+          //  Session::put('branchId', Input::get('community'));
+            return redirect('profile');
+        } else {
+            return redirect()->back()->withInput()->with('response',$response);
         }
-        /*return User::create([
-            'name'        => $user->name,
-            'email'       => $user->getEmail(),
-            'provider'    => $provider,
-            'provider_id' => $user->id,
-            'token'       => $user->token,
-            'token_secret'=> $user->tokenSecret,
-        ]);*/
+      }
     }
 }

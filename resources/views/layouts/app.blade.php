@@ -95,57 +95,6 @@
       </div>
     </nav>
 
-           
-
-    <!-- <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
-
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <ul class="nav navbar-nav">
-                    @if (Session::has('username') && Session::get('usertype') == 'MERCHANT')
-                        <li><a href="{{ url('admin/event') }}">Events</a></li>
-                        <li><a href="{{ url('admin/kyc') }}">Members</a></li>
-                    @elseif (Session::has('username') && Session::get('usertype') == 'CLIENT')
-                        <li><a href="{{ url('event') }}">Events</a></li>
-                    @endif
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                    @if (!Session::has('username'))
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
-                    @else
-                        <li class="dropdown">
-                            <a href="#" style="text-transform: uppercase;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Session::get('username') }} <span class="caret"></span>
-                            </a>
-
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    @if(Session::get('usertype') == 'CLIENT')<a href="{{ url('profile') }}">Profile</a>@endif
-                                    <a href="{{ url('/logout') }}">Logout</a>
-                                </li>
-                            </ul>
-                        </li>
-                    @endif
-                </ul>
-            </div>
-        </div>
-    </nav> -->
-
     @yield('content')
         
 

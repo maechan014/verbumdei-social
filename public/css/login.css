@@ -75,3 +75,9 @@ SOCIAL LOGIN
 .panel-body {
 	padding-top: 50px;
 }
+
+/* PROFILE*/
+
+.profile-input-style {
+	border-width: 0px;
+}
