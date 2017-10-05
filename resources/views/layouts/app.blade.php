@@ -77,7 +77,10 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                @if(Session::get('usertype') == 'CLIENT')<a href="{{ url('profile') }}">Profile</a>@endif
+                                @if(Session::get('usertype') == 'CLIENT')
+                                    <a href="{{ url('profile') }}">Profile</a>
+                                    <a href="{{ url('personal-accounting') }}">Personal Accounting</a>
+                                @endif
                                 <a href="{{ url('/logout') }}">Logout</a>
                             </li>
                         </ul>

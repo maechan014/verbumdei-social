@@ -15,7 +15,6 @@ Route::get('/', function () {
 
 		if($events->success) {
             if(count($events->result) == 1) $events->result = [$events->result];
-            // if (count($events->result) == count($events->result, COUNT_RECURSIVE)) $events->result = [$events->result];
              
 	        return view('welcome', ['events'=>$events->result]);
 	    } else {
@@ -68,6 +67,8 @@ Route::group(['middleware' => 'ClientMiddleware'], function()
 	Route::post('profile/update/{profileId}/beneficiary', 'ClientController@postProfileBeneficiary')->name('profile/update/beneficiary');
 
 	Route::post('event/{eventId}/join', 'ClientController@joinEvent')->name('joinEvent');
+
+	Route::post('personal-accounting', 'ClientController@accounting')->name('personal-accounting');
 });
 
 Route::get('test', function(){

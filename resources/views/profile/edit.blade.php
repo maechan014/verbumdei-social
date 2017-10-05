@@ -128,6 +128,8 @@
                               </div>
                           </form>
                       </div>
+                      <!-- #Personal -->
+
                       <div class="tab-pane fade in" id="Contact">
                           <form class="form-horizontal" method="POST" action="{{ route('profile/update/contact', ['profileId'=>$user->profileId]) }}">
                               {{ csrf_field() }}
@@ -162,19 +164,34 @@
                                   <label for="p_region" class="col-md-4 control-label">Region*</label>
                                   <div class="col-md-6">
                                       <select class="form-control" id="p_region" name="p_region">
-                                          <option value="">-Select Region-</option>
-                                          @foreach($regions as $key => $region)
-                                              <option value="{{ $key }}">{{ $key }}</option>
-                                          @endforeach
+                                          <option value="" disabled selected>Select Region</option>
+                                            @if (isset($user))
+                                              @foreach($regions as $key => $region)
+                                                @if ($key == $user->p_region)
+                                                  <option value="{{ $key }}" selected>{{ $key }}</option>
+                                                @else
+                                                <option value="{{ $key }}">{{ $key }}</option>
+                                                @endif
+                                              @endforeach
+                                            @else
+                                              @foreach($regions as $key => $region)
+                                                <option value="{{ $key }}">{{ $key }}</option>
+                                              @endforeach
+                                            @endif
                                       </select>
                                   </div>
                               </div>
+
 
                               <div class="form-group">
                                   <label for="p_province" class="col-md-4 control-label">Province*</label>
                                   <div class="col-md-6">
                                       <select class="form-control" id="p_province" name="p_province">
-                                          <option value="">-Select Province-</option>
+                                          @if (isset($user->p_province) && !empty($user->p_province))
+                                            <option value="{{ isset($user) ? $user->p_province : ''}}">{{ isset($user) ? $user->p_province : ''}}</option>
+                                          @else
+                                            <option value="" disabled selected>Select Province</option>
+                                          @endif
                                       </select>
                                   </div>
                               </div>
@@ -183,7 +200,11 @@
                                   <label for="p_cityOrMunicipal" class="col-md-4 control-label">City or Municipal*</label>
                                   <div class="col-md-6">
                                       <select class="form-control" id="p_cityOrMunicipal" name="p_cityOrMunicipal">
-                                          <option value="">-Select Municipal-</option>
+                                          @if (isset($user->p_cityOrMunicipal) && !empty($user->p_cityOrMunicipal))
+                                            <option value="{{ isset($user) ? $user->p_cityOrMunicipal : ''}}">{{ isset($user) ? $user->p_cityOrMunicipal : ''}}</option>
+                                          @else
+                                            <option value="" disabled selected>Select City/Municipal</option>
+                                          @endif
                                       </select>
                                   </div>
                               </div>
@@ -192,7 +213,11 @@
                                   <label for="p_barangay" class="col-md-4 control-label">Barangay*</label>
                                   <div class="col-md-6">
                                       <select class="form-control" id="p_barangay" name="p_barangay">
-                                          <option value="">-Select Barangay-</option>
+                                          @if (isset($user->p_barangay) && !empty($user->p_barangay))
+                                            <option value="{{ isset($user) ? $user->p_barangay : ''}}" selected>{{ isset($user) ? $user->p_barangay : ''}}</option>
+                                          @else
+                                            <option value="" disabled selected>Select Barangay</option>
+                                          @endif
                                       </select>
                                   </div>
                               </div>
@@ -206,16 +231,35 @@
 
                               <hr>
 
+                              <div class="form-group">
+                                <div class="checkbox no-top-margin">
+                                  <label>
+                                     <input id="same_address" type="checkbox" name="home_address" value="home_address">Same as Present Address
+                                  </label>
+                                </div>
+                              </div>
+
+
                               <h3 class="col-md-offset-2">Home Address:</h3>
 
                               <div class="form-group">
                                   <label for="h_region" class="col-md-4 control-label">Region</label>
                                   <div class="col-md-6">
-                                      <select class="form-control" id="p_region" name="p_region">
-                                          <option value="">-Select Region-</option>
-                                          @foreach($regions as $key => $region)
+                                      <select class="form-control" id="h_region" name="h_region">
+                                          <option value="" disabled selected>Select Region</option>
+                                          @if (isset($user))
+                                            @foreach($regions as $key => $region)
+                                              @if ($key == $user->h_region)
+                                                <option value="{{ $key }}" selected>{{ $key }}</option>
+                                              @else
                                               <option value="{{ $key }}">{{ $key }}</option>
-                                          @endforeach
+                                              @endif
+                                            @endforeach
+                                          @else
+                                            @foreach($regions as $key => $region)
+                                              <option value="{{ $key }}">{{ $key }}</option>
+                                            @endforeach
+                                          @endif
                                       </select>
                                   </div>
                               </div>
@@ -224,7 +268,11 @@
                                   <label for="h_province" class="col-md-4 control-label">Province</label>
                                   <div class="col-md-6">
                                       <select class="form-control" id="h_province" name="h_province">
-                                          <option value="">-Select Province-</option>
+                                          @if (isset($user) && !empty($user->h_province))
+                                            <option value="{{ isset($user) ? $user->h_province : ''}}" selected>{{ isset($user) ? $user->h_province : ''}}</option>
+                                          @else
+                                            <option value="" disabled selected>Select Province</option>
+                                          @endif
                                       </select>
                                   </div>
                               </div>
@@ -233,7 +281,12 @@
                                   <label for="h_cityOrMunicipal" class="col-md-4 control-label">City or Municipal</label>
                                   <div class="col-md-6">
                                       <select class="form-control" id="h_cityOrMunicipal" name="h_cityOrMunicipal">
-                                          <option value="">-Select Municipal-</option>
+                                          @if (isset($user->h_cityOrMunicipal) && !empty($user->h_cityOrMunicipal))
+                                            <option value="{{ isset($user) ? $user->h_cityOrMunicipal : ''}}" selected>{{ isset($user) ? $user->h_cityOrMunicipal : ''}}</option>
+                                          @else
+                                            <option value="" disabled selected>Select City/Municipal</option>
+                                          @endif
+                                      </select>
                                       </select>
                                   </div>
                               </div>
@@ -242,7 +295,11 @@
                                   <label for="h_barangay" class="col-md-4 control-label">Barangay</label>
                                   <div class="col-md-6">
                                       <select class="form-control" id="h_barangay" name="h_barangay">
-                                          <option value="">-Select Barangay-</option>
+                                          @if (isset($user->h_barangay) && !empty($user->h_barangay))
+                                            <option value="{{ isset($user) ? $user->h_barangay : ''}}" selected>{{ isset($user) ? $user->h_barangay : ''}}</option>
+                                            @else
+                                            <option value="" disabled selected>Select Barangay</option>
+                                          @endif
                                       </select>
                                   </div>
                               </div>
@@ -263,6 +320,8 @@
                               </div>
                           </form>
                       </div>
+                      <!-- #Contact -->
+
                       <div class="tab-pane fade in" id="Benefeciaries">
                           <form class="form-inline" method="POST" action="{{ route('profile/update/beneficiary', ['profileId'=>$user->profileId]) }}">
                               {{ csrf_field() }}
@@ -325,6 +384,7 @@
                               </div>
                           </div>
                       </div>
+                      <!-- #Benefeciaries -->
 
 
                       <div class="tab-pane fade" id="tab3default">Default 3</div>
@@ -469,11 +529,12 @@
     })();
 
     var p_province, p_cityOrMunicipal, p_barangay;
+
     $(document).on("change", "#p_region", function(e){
         p_province = json[$(this).val()];
         $('#p_province')
             .empty()
-            .append('<option selected="selected" value="">-Select Province-</option>')
+            .append('<option selected="selected" value="" disabled>Select Province</option>')
         $.each(p_province, function( index, value ) {
             $('#p_province').append($('<option>', { 
                 value: index,
@@ -486,7 +547,7 @@
         p_cityOrMunicipal = p_province[$(this).val()];
         $('#p_cityOrMunicipal')
             .empty()
-            .append('<option selected="selected" value="">-Select Municipal-</option>')
+            .append('<option selected="selected" value="" disabled>Select Municipal</option>')
         $.each(p_cityOrMunicipal, function( index, value ) { 
             $('#p_cityOrMunicipal').append($('<option>', { 
                 value: index,
@@ -499,7 +560,7 @@
         p_barangay = p_cityOrMunicipal[$(this).val()];
         $('#p_barangay')
             .empty()
-            .append('<option selected="selected" value="">-Select Barangay-</option>')
+            .append('<option selected="selected" value="" disabled>Select Barangay</option>')
         $.each(p_barangay, function( index, value ) {
             $('#p_barangay').append($('<option>', { 
                 value: index,
@@ -509,11 +570,11 @@
     });
 
     var h_province, h_cityOrMunicipal, h_barangay;
-    $(document).on("change", "#h_region", function(e){
+    $(document).on("click", "#h_region", function(e){
         h_province = json[$(this).val()];
         $('#h_province')
             .empty()
-            .append('<option selected="selected" value="">-Select Province-</option>')
+            .append('<option selected="selected" value="" disabled>Select Province</option>')
         $.each(h_province, function( index, value ) {
             $('#h_province').append($('<option>', { 
                 value: index,

@@ -32,7 +32,8 @@ nav a {
 }
 
 nav .navbar-left img {
-    max-width: 300px;
+    /*max-width: 300px;*/
+    max-width: 100%;
     max-height: 120px;
     -webkit-transition: all 240ms linear;
     -moz-transition: all 240ms linear;

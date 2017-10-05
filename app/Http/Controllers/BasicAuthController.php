@@ -51,7 +51,8 @@ class BasicAuthController extends Controller
 
     public function getRegister()
     {
-        $communities = Curl::to(Config('database.connections.curlIp'))
+        /*different IP to get the community list*/
+        $communities = Curl::to('http://52.74.115.167:703/index.php')
             ->withData( [ 'mtmaccess_api' => 'true',
                           'transaction' => '20021'
                            ] )

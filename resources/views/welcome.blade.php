@@ -18,7 +18,7 @@
                 <div class="card">
                     <a href="{{ route('viewEvent', [$event->iiId]) }}">
                     <div class="card-image">
-                        <img class="img-responsive" style="width: 100%; height: 200px;" src="http://52.74.115.167:703/{{ $event->iiImg }}">
+                        <img class="img-responsive" style="width: 100%; height: 200px;" src="http://54.179.145.165:300/{{ $event->iiImg }}">
                     </div><!-- card image -->
                     
                     <div class="card-content">

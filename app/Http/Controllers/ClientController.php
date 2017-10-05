@@ -18,8 +18,8 @@ class ClientController extends Controller
 	{
 		$events = Curl::to(Config('database.connections.curlIp'))
 		->withData([ 'mtmaccess_api' => 'true',
-						'transaction' => '20030',
-						'branchId'    => Session::get('branchId')
+						'transaction' => '20030'
+						//'branchId'    => Session::get('branchId')
 		 ])
 		->asJson()
 		->get();
@@ -103,8 +103,6 @@ class ClientController extends Controller
 
 	          echo http_build_query($data);
 
-	        
-
 	        // $submitReg = Curl::to(Config('database.connections.curlIp'))
 	        // ->withData($data)
 	        // ->asJson()
@@ -117,20 +115,20 @@ class ClientController extends Controller
 	public function getProfile()
 	{
 		$regions = json_decode(Config::get('constants.regions'));
+		$provinces = json_decode(Config::get('constant.regions'));
 		$user = Curl::to(Config('database.connections.curlIp'))
 			->withData([ 'mtmaccess_api' => 'true',
 				'transaction' => '20006',
 				'userName'  => Session::get('username') ])
 			->asJson()
 			->get();
-			// echo '<pre>';
-   //      print_r($user);
-   //      echo '</pre>';
+
 		if($user->success) {
 			if((count($user->result->beneficiaries) == count($user->result->beneficiaries, COUNT_RECURSIVE)) && count($user->result->beneficiaries) > 0)
 				$user->result->beneficiaries = [$user->result->beneficiaries];
 
 			// if (count($user->result->beneficiaries) == count($user->result->beneficiaries, COUNT_RECURSIVE)) $user->result->beneficiaries = [$user->result->beneficiaries];
+			//dd($regions->{'Region X'});
 			return view('profile.edit', ['regions'=>$regions, 'user'=>$user->result]);
 		} else
 			return "Unauthorized Page!";
@@ -184,9 +182,11 @@ class ClientController extends Controller
 				'h_province' => Input::get('h_province'),
 				'h_cityOrMunicipal' => Input::get('h_cityOrMunicipal'),
 				'h_barangay' => Input::get('h_barangay'),
-				'h_streetAddress' => Input::get('h_streetAddress') ])
+				'h_streetAddress' => Input::get('h_streetAddress')
+			])
 			->asJson()
 			->get();
+
 		if($response->success) {
 			return redirect()->back()->with('response',$response);
 		} else {
@@ -226,5 +226,9 @@ class ClientController extends Controller
 			$response->msg = "Please input beneficiary at least one.";
 			return redirect()->back()->with('response',$response);
 		}
+	}
+
+	public function accounting(){
+		return view('profile.accounting');
 	}
 }
