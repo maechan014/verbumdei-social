@@ -51,6 +51,10 @@ Navigation bar
     width: 100%;
 }
 
+.navbar {
+    margin-bottom: 0px;
+}
+
 #navbar-logo .navbar-toggle span{
     background: #52959D;
 }
@@ -61,6 +65,7 @@ Navigation bar
 }
 #navbar-logo{
      padding: 0px 30px;
+     max-height: 120px;
 }
 
 #navbar-menu .nav li a {
@@ -123,9 +128,6 @@ Navigation bar
 }
 .navbar-default .navbar-brand span{
     font-weight: 100 !important;
-}
-.navbar {
-    margin-bottom: 0px;
 }
 .padding-zero{
     padding: 0px;
@@ -743,6 +745,7 @@ Responsive media queries
     .navbar-fixed-top .navbar-collapse{
         margin: auto;
         text-align: center;
+        max-height: 400px;
     }
 
 }
