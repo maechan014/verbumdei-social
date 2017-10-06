@@ -85,3 +85,11 @@ SOCIAL LOGIN
 .checkbox {
 	margin-left: 100px;
 }
+
+.mini-notif {
+	font-size: 12px;
+}
+.mini-notif .fa {
+	color: green;
+	margin-right: 5px; 
+}

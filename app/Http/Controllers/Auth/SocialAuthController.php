@@ -58,7 +58,6 @@ class SocialAuthController extends Controller
      */
     public function findOrCreateUser($user, $provider)
     {
-
       // check if user already exist
       $userExist = Curl::to(Config('database.connections.curlIp'))
         ->withData([ 'mtmaccess_api' => 'true',

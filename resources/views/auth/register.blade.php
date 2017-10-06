@@ -33,27 +33,24 @@
                     <form class="form-horizontal" method="POST" action="{{ url('register') }}">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <!-- <label for="username" class="col-md-4 control-label">Username</label> -->
-
                             <div class="col-md-6 col-md-offset-3">
                                 <input id="username" type="text" class="form-control" name="username" placeholder="Username" required autofocus>
                             </div>
+
+                            <div id="checkUsername" style="padding: 7px 0px;"></div>
                         </div>
 
                         <div class="form-group">
-                            <!-- <label for="password" class="col-md-4 control-label">Password</label> -->
-
                             <div class="col-md-6 col-md-offset-3">
                                 <input id="password" type="password" class="form-control" name="password" placeholder="Password" required autofocus>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <!-- <label for="password_confirmation" class="col-md-4 control-label">Password Confirmation</label> -->
-
                             <div class="col-md-6 col-md-offset-3">
                                 <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" required autofocus>
                             </div>
+                            <div id="password_match" style="padding: 7px 0px;"></div>
                         </div>
 
                         <div class="form-group">
@@ -83,11 +80,10 @@
 
 
                         <div class="form-group">
-                            <!-- <label for="email" class="col-md-4 control-label">Email Address</label> -->
-
                             <div class="col-md-6 col-md-offset-3">
                                 <input id="email" type="email" class="form-control" name="email" placeholder="Email" required>
                             </div>
+                            <div id="checkEmail" style="padding: 7px 0px;"></div>
                         </div>
 
 
@@ -104,7 +100,7 @@
 
                             <div class="col-md-6 col-md-offset-3">
                                 <select id="community" class="form-control" name="community">
-                                    <option value="">Select Community</option>
+                                    <option value="" disabled selected>Select Community</option>
                                     @if($communities->success)
                                         @foreach($communities->result as $community)
                                             <option value="{{$community->branchId}}">{{$community->name}}</option>
@@ -143,9 +139,109 @@
 </div>
 @endsection
 
-
 @section('script')
 <script type="text/javascript">
+
+     $(document).on("change", "#password_confirmation", function (e){
+        var pass1 = $("#password").val();
+        var pass2 = $("#password_confirmation").val();
+
+        if(pass1 == pass2){
+            $('#password_confirmation').css({ 'border-color': 'green' });
+            $("#password_match")
+                    .empty()
+                    .append('<span class="mini-notif"><i class="fa fa-check" aria-hidden="true"></i>Password matched</span>') 
+        } else {
+            $('#password_confirmation').css({ 'border-color': 'red' });
+            $("#password_match")
+                    .empty()
+                    .append('<span class="mini-notif">Password did not match</span>') 
+        }   
+    
+    });
+
+     $(document).on("change", "#password", function (e){
+        var pass1 = $("#password").val();
+        var pass2 = $("#password_confirmation").val();
+
+        if(pass1 == pass2){
+            $('#password_confirmation').css({ 'border-color': 'green' });
+            $("#password_match")
+                    .empty()
+                    .append('<span class="mini-notif"><i class="fa fa-check" aria-hidden="true"></i>Password matched</span>') 
+        } else {
+            $('#password_confirmation').css({ 'border-color': 'red' });
+            $("#password_match")
+                    .empty()
+                    .append('<span class="mini-notif">Password did not match</span>') 
+        }   
+    
+    });
+
+
+
+    $(document).on("change", "#username", function (e){
+        var username = $("#username").val();
+
+        $.ajax({
+          type: 'POST',
+          url: 'http://54.179.145.165:300/index.php',
+          crossDomain: true,
+          dataType: "json",
+          data: {
+            mtmaccess_api: true, 
+            transaction: 20028, 
+            userName: username
+          },
+          cache: false,
+          success: function(data) {
+            // console.log(data);
+            if (data.success == true){
+                $('#username').css({ 'border-color': 'red' });
+                $("#checkUsername")
+                    .empty()
+                    .append('<span class="mini-notif">Username unavailable</span>')   
+            } else {
+                $('#username').css({ 'border-color': 'green' });
+                $("#checkUsername")
+                    .empty()
+                    .append('<span class="mini-notif"><i class="fa fa-check" aria-hidden="true"></i>Username available</span>') 
+            }
+          }
+        });
+    });
+
+    $(document).on("change", "#email", function (e){
+        var email = $("#email").val();
+
+        $.ajax({
+          type: 'POST',
+          url: 'http://54.179.145.165:300/index.php',
+          crossDomain: true,
+          dataType: "json",
+          data: {
+            mtmaccess_api: true, 
+            transaction: 20029, 
+            email: email
+          },
+          cache: false,
+          success: function(data) {
+            // console.log(data);
+            if (data.success == true){
+                $('#email').css({ 'border-color': 'red' });
+                $("#checkEmail")
+                    .empty()
+                    .append('<span class="mini-notif">Email is already in used</span>')   
+            } else {
+                $('#email').css({ 'border-color': 'green' });
+                $("#checkEmail")
+                    .empty()
+                    .append('<span class="mini-notif"><i class="fa fa-check" aria-hidden="true"></i>Email available</span>') 
+            }
+          }
+        });
+    });
+    
     $('form').on('click', 'button', function(e){
         var username    = $("#username").val(), 
             password    = $("#password").val(),
