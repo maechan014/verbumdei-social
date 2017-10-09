@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
     <link href="{{ url('css/style.css') }}" rel="stylesheet" >
     <link href="{{ url('css/myStyle.css') }}" rel="stylesheet" >
-     <link href="{{ url('css/login.css') }}" rel="stylesheet" >
+    <link href="{{ url('css/login.css') }}" rel="stylesheet" >
+    <link href="{{ url('css/accounting.css') }}" rel="stylesheet" >
     <script src="{{ url('js/jquery-3.2.0.min.js') }}"></script>
     
     @yield('style')
@@ -79,7 +80,7 @@
                             <li>
                                 @if(Session::get('usertype') == 'CLIENT')
                                     <a href="{{ url('profile') }}">Profile</a>
-                                    <a href="{{ url('personal-accounting') }}">Personal Accounting</a>
+                                    <a href="{{ url('accounting') }}">Personal Accounting</a>
                                 @endif
                                 <a href="{{ url('/logout') }}">Logout</a>
                             </li>

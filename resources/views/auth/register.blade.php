@@ -37,7 +37,7 @@
                                 <input id="username" type="text" class="form-control" name="username" placeholder="Username" required autofocus>
                             </div>
 
-                            <div id="checkUsername" style="padding: 7px 0px;"></div>
+                            <div id="checkUsername" class="col-md-3" style="padding: 10px 0px"></div>
                         </div>
 
                         <div class="form-group">
@@ -50,7 +50,7 @@
                             <div class="col-md-6 col-md-offset-3">
                                 <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" required autofocus>
                             </div>
-                            <div id="password_match" style="padding: 7px 0px;"></div>
+                            <div id="password_match" class="col-md-3" style="padding: 10px 0px"></div>
                         </div>
 
                         <div class="form-group">
@@ -83,7 +83,7 @@
                             <div class="col-md-6 col-md-offset-3">
                                 <input id="email" type="email" class="form-control" name="email" placeholder="Email" required>
                             </div>
-                            <div id="checkEmail" style="padding: 7px 0px;"></div>
+                            <div id="checkEmail" class="col-md-3" style="padding: 10px 0px"></div>
                         </div>
 
 
