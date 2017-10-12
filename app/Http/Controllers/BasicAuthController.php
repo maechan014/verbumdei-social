@@ -32,16 +32,33 @@ class BasicAuthController extends Controller
             ->get();
 
         if($response->success) {
+            $accounts = Curl::to(Config('database.connections.curlIp'))
+                ->withData([ 'mtmaccess_api' => 'true',
+                    'transaction' => '20037',
+                    'profileId' => $response->result->profileId,
+                ])
+                ->asJson()
+                ->get();  
             if(isset($response->result->userData)) {
                 Session::put('usertype', $response->result->userData->type);
                 Session::put('username', Input::get('username'));
                 Session::put('password', md5(Input::get('password')));
                 Session::put('branchId', $response->result->userData->branchId_fk);
+                if(is_array($accounts->result)){
+                    Session::put('accName', $accounts->result[0]->accName);
+                } else {
+                    Session::put('accName', $accounts->result->accName);
+                }
             } else {
                 Session::put('usertype', $response->result->type);
                 Session::put('username', Input::get('username'));
                 Session::put('password', md5(Input::get('password')));
                 Session::put('branchId', $response->result->branchId_fk);
+                if(is_array($accounts->result)){
+                    Session::put('accName', $accounts->result[0]->accName);
+                } else {
+                    Session::put('accName', $accounts->result->accName);
+                }                
             }
             return redirect('/');
         } else {

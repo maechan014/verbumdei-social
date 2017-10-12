@@ -69,6 +69,7 @@ Route::group(['middleware' => 'ClientMiddleware'], function()
 	Route::post('event/{eventId}/join', 'ClientController@joinEvent')->name('joinEvent');
 
 	Route::get('accounting/', 'AccountingController@accounting')->name('accounting');
+	Route::get('accounting/{accName}', 'AccountingController@getAccount')->name('accounting');
 	Route::post('accounting/{accountId}/income', 'AccountingController@addIncome')->name('accounting/income');
 	Route::post('accounting/{profileId}/addAccount', 'AccountingController@addAccount')->name('accounting/addAccount');
 });
