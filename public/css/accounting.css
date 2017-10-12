@@ -7,6 +7,7 @@
 	color: #000;
 	margin-bottom: 10px;
 	background: #fff;
+	height: 70px;
 }
 
 #side-header .dropdown-menu {
@@ -21,7 +22,6 @@
 }
 
 #side-header .nav li a#active, #side-header .nav li a:hover, #side-header .nav li a:focus{
-    /*color: #000;*/
     text-decoration: none;
     background-color: transparent;
 }
@@ -45,10 +45,25 @@
 	padding: 15px 0px;
 }
 
+.group-margin {
+	margin-bottom: 15px;
+}
+
+.options .btn-primary {
+	width: 100%;
+}
+
 .options{
 	padding-bottom: 30px;
 }
 
+.options .col-sm-6{
+	padding-left: 0px;
+}
+
+.options .btn-link:focus, .options .btn-link:hover{
+	text-decoration: none;
+}
 
 .shadow-box{
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -88,3 +103,12 @@
 .summary-balance {
 	background: #4f88ee;
 }
+
+/*OVERRIDES*/
+
+@media(max-width: 570px) {
+	#add-account .modal-dialog {
+		width: 100%;
+	}      
+}
+

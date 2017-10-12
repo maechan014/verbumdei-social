@@ -115,7 +115,6 @@ class ClientController extends Controller
 	public function getProfile()
 	{
 		$regions = json_decode(Config::get('constants.regions'));
-		$provinces = json_decode(Config::get('constant.regions'));
 		$user = Curl::to(Config('database.connections.curlIp'))
 			->withData([ 'mtmaccess_api' => 'true',
 				'transaction' => '20006',
@@ -136,6 +135,7 @@ class ClientController extends Controller
 
 	public function postProfilePersonal($profileId)
 	{
+		//dd($profileId);
 		$response = Curl::to(Config('database.connections.curlIp'))
 			->withData([ 'mtmaccess_api' => 'true',
 				'transaction' => '20005',
@@ -226,9 +226,5 @@ class ClientController extends Controller
 			$response->msg = "Please input beneficiary at least one.";
 			return redirect()->back()->with('response',$response);
 		}
-	}
-
-	public function accounting(){
-		return view('profile.accounting');
 	}
 }
